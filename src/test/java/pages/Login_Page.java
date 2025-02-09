@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import utilities.CommonMethods;
+import utilities.Excelutils;
 import utilities.Screenshots;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class Login_Page extends CommonMethods {
 
     ExtentTest test;
-
+    Excelutils excelUtils = new Excelutils();
 
     public Login_Page(ExtentTest test){
         PageFactory.initElements(PageDriver.getCurrentDriver(), this);
@@ -65,17 +66,17 @@ public class Login_Page extends CommonMethods {
     public void login() throws IOException {
         try{
 
-            //excelUtils.ReadExcel();
+            excelUtils.ReadExcel();
             test.info("Please enter your username");
             if(username.isDisplayed()){
-                username.sendKeys("Admin");
+                username.sendKeys(excelUtils.username);
                 passCase("You have successfully entered your username");
                 Thread.sleep(5000);
 
                 try {
                     test.info("Please enter your password");
                     if(password.isDisplayed()){
-                        password.sendKeys("admin123");
+                        password.sendKeys(excelUtils.password);
                         passCase("You have successfully entered your password");
                         Thread.sleep(5000);
 
